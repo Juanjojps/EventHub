@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" 
+      xmlns:fx="http://javafx.com/fxml" 
+      fx:controller="ui.MainController"
+      spacing="10" 
+      style="-fx-padding: 20; -fx-background-color: #f5f5f5;">
+
+    <!-- Encabezado -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="EventHub - Gestor de Eventos" 
+               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Exportar Informes" 
+                style="-fx-background-color: #3498db; -fx-text-fill: white;"
+                onAction="#abrirMenuExportar"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Pestañas principales -->
+    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        
+        <!-- Pestaña 1: Gestión de Eventos -->
+        <Tab text="Eventos">
+            <VBox spacing="15" style="-fx-padding: 15;">
+                
+                <!-- Formulario de Eventos -->
+                <Group>
+                    <Label text="Gestión de Eventos" 
+                           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <GridPane hgap="10" vgap="10" 
+                              style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5;">
+                        <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="eventoNombre" GridPane.rowIndex="0" GridPane.columnIndex="1" 
+                                   GridPane.columnSpan="3" GridPane.hgrow="ALWAYS"/>
+                        
+                        <Label text="Tipo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="eventoTipo" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Fecha:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                        <DatePicker fx:id="eventoFecha" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                        
+                        <Label text="Aforo Máximo:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="eventoAforo" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Precio Entrada:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                        <TextField fx:id="eventoPrecio" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+                    </GridPane>
+                    
+                    <!-- Botones de Eventos -->
+                    <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
+                        <Button text="Nuevo" onAction="#nuevoEvento" 
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                        <Button text="Guardar" onAction="#guardarEvento" 
+                                style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                        <Button text="Editar" onAction="#editarEvento" 
+                                style="-fx-background-color: #f39c12; -fx-text-fill: white;"/>
+                        <Button text="Eliminar" onAction="#eliminarEvento" 
+                                style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Buscar" onAction="#buscarEventos" 
+                                style="-fx-background-color: #9b59b6; -fx-text-fill: white;"/>
+                        <Button text="Limpiar Filtros" onAction="#limpiarFiltrosEventos"/>
+                    </HBox>
+                </Group>
+
+                <!-- Tabla de Eventos -->
+                <Group>
+                    <Label text="Listado de Eventos" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <TableView fx:id="tablaEventos" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn text="ID" fx:id="colEventoId"/>
+                            <TableColumn text="Nombre" fx:id="colEventoNombre"/>
+                            <TableColumn text="Tipo" fx:id="colEventoTipo"/>
+                            <TableColumn text="Fecha" fx:id="colEventoFecha"/>
+                            <TableColumn text="Aforo Máx" fx:id="colEventoAforo"/>
+                            <TableColumn text="Precio" fx:id="colEventoPrecio"/>
+                            <TableColumn text="Entradas Vendidas" fx:id="colEventoVendidas"/>
+                        </columns>
+                    </TableView>
+                </Group>
+            </VBox>
+        </Tab>
+        
+        <!-- Pestaña 2: Gestión de Asistentes y Entradas -->
+        <Tab text="Asistentes y Entradas">
+            <SplitPane dividerPositions="0.4" VBox.vgrow="ALWAYS">
+                
+                <!-- Panel izquierdo: Asistentes -->
+                <VBox spacing="10" style="-fx-padding: 15;">
+                    <Label text="Gestión de Asistentes" 
+                           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    
+                    <!-- Formulario Asistente -->
+                    <GridPane hgap="10" vgap="10" 
+                              style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5;">
+                        <Label text="DNI:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="asistenteDni" GridPane.rowIndex="0" GridPane.columnIndex="1" 
+                                   GridPane.columnSpan="2"/>
+                        
+                        <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="asistenteNombre" GridPane.rowIndex="1" GridPane.columnIndex="1" 
+                                   GridPane.columnSpan="2"/>
+                        
+                        <Label text="Email:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="asistenteEmail" GridPane.rowIndex="2" GridPane.columnIndex="1" 
+                                   GridPane.columnSpan="2"/>
+                        
+                        <Label text="Teléfono:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="asistenteTelefono" GridPane.rowIndex="3" GridPane.columnIndex="1" 
+                                   GridPane.columnSpan="2"/>
+                    </GridPane>
+                    
+                    <!-- Botones Asistentes -->
+                    <HBox spacing="10">
+                        <Button text="Nuevo" onAction="#nuevoAsistente" 
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                        <Button text="Guardar" onAction="#guardarAsistente" 
+                                style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                        <Button text="Editar" onAction="#editarAsistente" 
+                                style="-fx-background-color: #f39c12; -fx-text-fill: white;"/>
+                        <Button text="Eliminar" onAction="#eliminarAsistente" 
+                                style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Buscar" onAction="#buscarAsistentes"/>
+                    </HBox>
+                    
+                    <!-- Tabla Asistentes -->
+                    <Label text="Listado de Asistentes" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <TableView fx:id="tablaAsistentes" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn text="ID" fx:id="colAsistenteId"/>
+                            <TableColumn text="DNI" fx:id="colAsistenteDni"/>
+                            <TableColumn text="Nombre" fx:id="colAsistenteNombre"/>
+                            <TableColumn text="Email" fx:id="colAsistenteEmail"/>
+                            <TableColumn text="Teléfono" fx:id="colAsistenteTelefono"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+                
+                <!-- Panel derecho: Entradas -->
+                <VBox spacing="10" style="-fx-padding: 15;">
+                    <Label text="Venta de Entradas" 
+                           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    
+                    <!-- Selección para venta -->
+                    <GridPane hgap="10" vgap="10" 
+                              style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5;">
+                        <Label text="Evento:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="comboEventosVenta" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Asistente:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="comboAsistentesVenta" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Precio Final:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="entradaPrecioFinal" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </GridPane>
+                    
+                    <!-- Botón Vender Entrada -->
+                    <Button text="Vender Entrada" onAction="#venderEntrada" 
+                            style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+                    
+                    <!-- Tabla Entradas -->
+                    <Label text="Entradas Vendidas" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <TableView fx:id="tablaEntradas" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn text="ID" fx:id="colEntradaId"/>
+                            <TableColumn text="Evento" fx:id="colEntradaEvento"/>
+                            <TableColumn text="Asistente" fx:id="colEntradaAsistente"/>
+                            <TableColumn text="Fecha Compra" fx:id="colEntradaFecha"/>
+                            <TableColumn text="Precio Final" fx:id="colEntradaPrecio"/>
+                        </columns>
+                    </TableView>
+                    
+                    <!-- Filtros para entradas -->
+                    <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
+                        <Label text="Filtrar por:"/>
+                        <RadioButton text="Evento seleccionado" fx:id="radioFiltrarEvento" selected="true"/>
+                        <RadioButton text="Asistente seleccionado" fx:id="radioFiltrarAsistente"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Actualizar Lista" onAction="#actualizarEntradas"/>
+                    </HBox>
+                </VBox>
+            </SplitPane>
+        </Tab>
+    </TabPane>
+
+    <!-- Barra de estado -->
+    <Separator/>
+    <HBox>
+        <Label fx:id="labelEstado" text="Listo" 
+               style="-fx-text-fill: #7f8c8d;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="EventHub v1.0" 
+               style="-fx-text-fill: #95a5a6;"/>
+    </HBox>
+</VBox>

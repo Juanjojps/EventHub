@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.ControladorPrincipal">
+   <center>
+      <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Gestión de Eventos">
+            <content>
+              <BorderPane>
+                     <center>
+                        <TableView fx:id="tablaEventos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="colNombreEvento" prefWidth="150.0" text="Nombre" />
+                            <TableColumn fx:id="colTipoEvento" prefWidth="100.0" text="Tipo" />
+                              <TableColumn fx:id="colFechaEvento" prefWidth="100.0" text="Fecha" />
+                              <TableColumn fx:id="colAforoEvento" prefWidth="75.0" text="Aforo" />
+                              <TableColumn fx:id="colPrecioEvento" prefWidth="75.0" text="Precio" />
+                          </columns>
+                        </TableView>
+                     </center>
+                     <bottom>
+                        <VBox spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Formulario Evento" style="-fx-font-weight: bold;" />
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <TextField fx:id="txtNombreEvento" promptText="Nombre del evento" />
+                                    <TextField fx:id="txtTipoEvento" promptText="Tipo (Concierto...)" />
+                                    <DatePicker fx:id="dpFechaEvento" promptText="Fecha" />
+                                    <TextField fx:id="txtAforoEvento" promptText="Aforo Máx." prefWidth="80.0" />
+                                    <TextField fx:id="txtPrecioEvento" promptText="Precio" prefWidth="80.0" />
+                                 </children>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#nuevoEvento" text="Nuevo / Limpiar" />
+                                    <Button mnemonicParsing="false" onAction="#guardarEvento" text="Guardar" />
+                                    <Button mnemonicParsing="false" onAction="#eliminarEvento" text="Eliminar" />
+                                 </children>
+                              </HBox>
+                              <Label text="Informes y Búsqueda" style="-fx-font-weight: bold; -fx-padding: 10 0 0 0;" />
+                              <HBox spacing="10.0" alignment="CENTER_LEFT">
+                                 <children>
+                                 	<TextField fx:id="txtBusquedaEvento" promptText="Buscar por nombre..." />
+                                 	<Button mnemonicParsing="false" onAction="#buscarEvento" text="Buscar" />
+                                    <Button mnemonicParsing="false" onAction="#exportarAsistentes" text="Exportar Asistentes (TXT)" />
+                                    <Button mnemonicParsing="false" onAction="#exportarResumen" text="Exportar Resumen Ventas (TXT)" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </bottom>
+                  </BorderPane>
+            </content>
+          </Tab>
+          <Tab text="Asistentes y Entradas">
+            <content>
+              <BorderPane>
+                     <left>
+                        <VBox prefWidth="450.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Gestión de Asistentes" style="-fx-font-size: 14; -fx-font-weight: bold;" />
+                              <TableView fx:id="tablaAsistentes" prefHeight="300.0" prefWidth="200.0">
+                                <columns>
+                                  <TableColumn fx:id="colDniAsistente" prefWidth="75.0" text="DNI" />
+                                  <TableColumn fx:id="colNombreAsistente" prefWidth="120.0" text="Nombre" />
+                                    <TableColumn fx:id="colEmailAsistente" prefWidth="120.0" text="Email" />
+                                </columns>
+                              </TableView>
+                              <TextField fx:id="txtDniAsistente" promptText="DNI" />
+                              <TextField fx:id="txtNombreAsistente" promptText="Nombre completo" />
+                              <TextField fx:id="txtEmailAsistente" promptText="Email" />
+                              <TextField fx:id="txtTelefonoAsistente" promptText="Teléfono" />
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#nuevoAsistente" text="Nuevo" />
+                                    <Button mnemonicParsing="false" onAction="#guardarAsistente" text="Guardar" />
+                                    <Button mnemonicParsing="false" onAction="#eliminarAsistente" text="Eliminar" />
+                                    <Button mnemonicParsing="false" onAction="#buscarAsistente" text="Buscar" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </left>
+                     <center>
+                        <VBox spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Venta de Entradas" style="-fx-font-size: 14; -fx-font-weight: bold;" />
+                              <Label text="1. Selecciona un Evento:" />
+                              <ComboBox fx:id="comboEventos" prefWidth="300.0" promptText="-- Seleccionar Evento --" />
+                              <Label text="2. Selecciona un Asistente (de la lista o buscar):" />
+                              <TextField fx:id="txtAsistenteSeleccionado" editable="false" promptText="Asistente seleccionado..." />
+                              <Button mnemonicParsing="false" onAction="#venderEntrada" style="-fx-background-color: lightgreen;" text="VENDER ENTRADA" />
+                              
+                              <Label text="Entradas Vendidas (del evento seleccionado):" style="-fx-padding: 10 0 0 0;" />
+                              <TableView fx:id="tablaEntradas" prefHeight="200.0" prefWidth="200.0">
+                                <columns>
+                                  <TableColumn fx:id="colEntradaId" prefWidth="50.0" text="ID" />
+                                  <TableColumn fx:id="colEntradaAsistente" prefWidth="150.0" text="Asistente" />
+                                    <TableColumn fx:id="colEntradaFecha" prefWidth="120.0" text="Fecha Compra" />
+                                    <TableColumn fx:id="colEntradaPrecio" prefWidth="75.0" text="Precio" />
+                                </columns>
+                              </TableView>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
