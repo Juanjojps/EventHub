@@ -9,29 +9,29 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-	    // Cargar el FXML desde el classpath (debe estar en src/main/resources/Vista/MainView.fxml)
-	    URL fxmlUrl = getClass().getResource("/Vista/MainView.fxml");
-	    
-	    Parent root = FXMLLoader.load(fxmlUrl);
-	    
-	    primaryStage.setTitle("Gestor de Eventos");
-	    Scene scene = new Scene(root, 1000, 700);
-	    
-	    // Cargar la hoja de estilos
-	    URL cssUrl = getClass().getResource("/Modelo/application.css");
-	    if (cssUrl != null) {
-	        scene.getStylesheets().add(cssUrl.toExternalForm());
-	    }
-	    
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
+		
+		URL fxmlUrl = getClass().getResource("/Vista/EventosView.fxml");
+
+		Parent root = FXMLLoader.load(fxmlUrl);
+
+		primaryStage.setTitle("Gestor de Eventos");
+		Scene scene = new Scene(root, 1000, 700);
+
+		// Cargar la hoja de estilos
+		URL cssUrl = getClass().getResource("/Modelo/application.css");
+		if (cssUrl != null) {
+			scene.getStylesheets().add(cssUrl.toExternalForm());
+		}
+
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
-    public static void main(String[] args) {
-        launch(args);
-    	
-    }
+	public static void main(String[] args) {
+		launch(args);
+
+	}
 }

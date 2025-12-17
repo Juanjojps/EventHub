@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.ControladorEventos">
+   <top>
+      <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10; -fx-background-color: #f0f0f0;">
+         <children>
+            <Label text="GESTIÓN DE EVENTOS" style="-fx-font-size: 18; -fx-font-weight: bold;" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            <Button mnemonicParsing="false" onAction="#irAAsistentes" text="Ir a Asistentes &gt;&gt;" style="-fx-font-weight: bold; -fx-base: #add8e6;"/>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <BorderPane>
+         <center>
+            <TableView fx:id="tablaEventos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <columns>
+                  <TableColumn fx:id="colNombreEvento" prefWidth="150.0" text="Nombre" />
+                  <TableColumn fx:id="colTipoEvento" prefWidth="100.0" text="Tipo" />
+                  <TableColumn fx:id="colFechaEvento" prefWidth="100.0" text="Fecha" />
+                  <TableColumn fx:id="colAforoEvento" prefWidth="75.0" text="Aforo" />
+                  <TableColumn fx:id="colPrecioEvento" prefWidth="75.0" text="Precio" />
+               </columns>
+            </TableView>
+         </center>
+         <bottom>
+            <VBox spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Formulario Evento" style="-fx-font-weight: bold;" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <TextField fx:id="txtNombreEvento" promptText="Nombre del evento" />
+                        <TextField fx:id="txtTipoEvento" promptText="Tipo (Concierto...)" />
+                        <DatePicker fx:id="dpFechaEvento" promptText="Fecha" />
+                        <TextField fx:id="txtAforoEvento" promptText="Aforo Máx." prefWidth="80.0" />
+                        <TextField fx:id="txtPrecioEvento" promptText="Precio" prefWidth="80.0" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#nuevoEvento" text="Nuevo / Limpiar" />
+                        <Button mnemonicParsing="false" onAction="#guardarEvento" text="Guardar" />
+                        <Button mnemonicParsing="false" onAction="#eliminarEvento" text="Eliminar" />
+                     </children>
+                  </HBox>
+                  <Label text="Informes y Búsqueda" style="-fx-font-weight: bold; -fx-padding: 10 0 0 0;" />
+                  <HBox spacing="10.0" alignment="CENTER_LEFT">
+                     <children>
+                        <TextField fx:id="txtBusquedaEvento" promptText="Buscar por nombre..." />
+                        <Button mnemonicParsing="false" onAction="#buscarEvento" text="Buscar" />
+                        <Button mnemonicParsing="false" onAction="#exportarAsistentes" text="Exportar Asistentes (TXT)" />
+                        <Button mnemonicParsing="false" onAction="#exportarResumen" text="Exportar Resumen Ventas (TXT)" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </bottom>
+      </BorderPane>
+   </center>
+</BorderPane>

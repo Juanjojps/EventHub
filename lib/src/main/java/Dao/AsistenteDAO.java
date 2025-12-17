@@ -20,7 +20,7 @@ public class AsistenteDAO {
                 transaction.rollback();
             }
             // Propagar excepción para manejar duplicados de DNI por ejemplo
-            new Exception("No se puede guardar el asistente (posiblemente DNI duplicado)");
+            throw new RuntimeException("No se puede guardar el asistente (posiblemente DNI duplicado)", e);
         }
     }
 
@@ -34,7 +34,7 @@ public class AsistenteDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw e;
+            throw new RuntimeException("No se puede actualizar el asistente", e);
         }
     }
 
